@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.custom-shadow {
+  box-shadow: 0px 4px 12px 0px #00000014;
+}
+
+.shadow-top {
+  box-shadow: 0 -4px 6px -1px #00000014;
+}
+
+
+.main-button {
+  background: #E63030;
+  @apply w-full text-white font-extrabold h-[70px] rounded-full cursor-pointer text-xl uppercase relative overflow-hidden shadow;
+}
+
+.submit-button {
+  background: #E63030;
+  @apply w-full text-white font-extrabold h-[70px] rounded-full cursor-pointer text-xl uppercase relative overflow-hidden shadow;
+}
+
+.tg-button {
+  background: radial-gradient(50% 50% at 50% 50%, #1E8AB5 0%, #007AAB 100%);
+  @apply w-full text-white font-extrabold h-[70px] rounded-full cursor-pointer text-xl uppercase relative overflow-hidden shadow;
+}
+
+.main-button::before, .submit-button::before, .tg-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+.gift {
+  transition: transform 0.3s ease-in-out;
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+}
