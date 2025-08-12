@@ -25,7 +25,7 @@ body {
 
 .tg-button {
   background: radial-gradient(50% 50% at 50% 50%, #1E8AB5 0%, #007AAB 100%);
-  @apply w-full text-white font-extrabold h-[70px] rounded-full cursor-pointer text-xl uppercase relative overflow-hidden shadow;
+  @apply w-full flex items-center justify-center text-white font-extrabold h-[70px] rounded-full cursor-pointer text-xl uppercase relative overflow-hidden shadow;
 }
 
 .main-button::before, .submit-button::before, .tg-button::before {
