@@ -1,9 +1,6 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function() {
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity 0.3s';
-
   // CSS yuklanganidan keyin
   window.addEventListener('load', function() {
     document.body.style.opacity = '1';
