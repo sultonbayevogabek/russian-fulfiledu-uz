@@ -1,101 +1,111 @@
 'use strict';
 
-// Index page
-try {
-  const phone = document.getElementById("phone");
-  const allowedKeys = [
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    'Backspace',
-    'ArrowLeft',
-    'ArrowUp',
-    'ArrowDown',
-    'ArrowRight',
-    'Enter'
-  ]
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.3s';
 
-  phone.addEventListener("keydown", e => {
-    if (!allowedKeys.includes(e.key)) {
-      e.preventDefault();
-    }
-  })
+  // CSS yuklanganidan keyin
+  window.addEventListener('load', function() {
+    document.body.style.opacity = '1';
+  });
 
-  phone.addEventListener("input", e => {
-    const value = e.target.value.replace(/[^0-9]/g, '');
-    let parts = [value.slice(0, 2), value.slice(2, 5), value.slice(5, 7), value.slice(7, 9)];
+  // Index page
+  try {
+    const phone = document.getElementById("phone");
+    const allowedKeys = [
+      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      'Backspace',
+      'ArrowLeft',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowRight',
+      'Enter'
+    ]
 
-    let result = parts[0];
-
-    for (let i = 1; i < parts.length; i++) {
-      if (parts[i]) {
-        result += `-${parts[i]}`;
+    phone.addEventListener("keydown", e => {
+      if (!allowedKeys.includes(e.key)) {
+        e.preventDefault();
       }
-    }
-
-    e.target.value = result;
-  })
-
-  const registerButtons = document.querySelectorAll('[data-main-button]');
-  const modalBackdrop = document.querySelector('[data-modal-backdrop]');
-  const modalCloserElements = document.querySelectorAll('[data-modal-close]');
-  const form = document.querySelector('[data-form]');
-  const formAlert = document.querySelector('[data-form-alert]');
-
-  registerButtons.forEach(async button => {
-    button.addEventListener('click', async () => {
-      modalBackdrop.classList.remove('hidden');
     })
-  })
 
-  function closeModal() {
-    modalBackdrop.classList.add('hidden');
-  }
+    phone.addEventListener("input", e => {
+      const value = e.target.value.replace(/[^0-9]/g, '');
+      let parts = [value.slice(0, 2), value.slice(2, 5), value.slice(5, 7), value.slice(7, 9)];
 
-  window.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      closeModal();
+      let result = parts[0];
+
+      for (let i = 1; i < parts.length; i++) {
+        if (parts[i]) {
+          result += `-${parts[i]}`;
+        }
+      }
+
+      e.target.value = result;
+    })
+
+    const registerButtons = document.querySelectorAll('[data-main-button]');
+    const modalBackdrop = document.querySelector('[data-modal-backdrop]');
+    const modalCloserElements = document.querySelectorAll('[data-modal-close]');
+    const form = document.querySelector('[data-form]');
+    const formAlert = document.querySelector('[data-form-alert]');
+
+    registerButtons.forEach(async button => {
+      button.addEventListener('click', async () => {
+        modalBackdrop.classList.remove('hidden');
+      })
+    })
+
+    function closeModal() {
+      modalBackdrop.classList.add('hidden');
     }
-  })
 
-  modalCloserElements.forEach(el => {
-    el.addEventListener('click', e => {
-      if (e.target.hasAttribute('data-modal-close')) {
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
         closeModal();
       }
     })
-  })
 
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
+    modalCloserElements.forEach(el => {
+      el.addEventListener('click', e => {
+        if (e.target.hasAttribute('data-modal-close')) {
+          closeModal();
+        }
+      })
+    })
 
-    const submitButton = e.target.querySelector('[data-form-button]');
-    const name = e.target.querySelector('#name').value.trim();
-    const phone = e.target.querySelector('#phone').value?.replace(/[^0-9]/g, '');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
 
-    if (!name.length) {
-      formAlert.textContent = 'Ismingizni kiriting';
-      formAlert.classList.remove('hidden');
-      return;
-    }
+      const submitButton = e.target.querySelector('[data-form-button]');
+      const name = e.target.querySelector('#name').value.trim();
+      const phone = e.target.querySelector('#phone').value?.replace(/[^0-9]/g, '');
 
-    if (phone?.length !== 9) {
-      formAlert.textContent = 'Telefon raqamingizni kiriting';
-      formAlert.classList.remove('hidden');
-      return;
-    }
+      if (!name.length) {
+        formAlert.textContent = 'Ismingizni kiriting';
+        formAlert.classList.remove('hidden');
+        return;
+      }
 
-    if (name.length && phone?.length === 9) {
-      submitButton.setAttribute('disabled', true);
-      submitButton.textContent = 'Yuborilmoqda...'
+      if (phone?.length !== 9) {
+        formAlert.textContent = 'Telefon raqamingizni kiriting';
+        formAlert.classList.remove('hidden');
+        return;
+      }
 
-      localStorage.setItem('user', JSON.stringify({
-        name, phone: '+998' + phone, time: new Date().toLocaleString()
-      }))
+      if (name.length && phone?.length === 9) {
+        submitButton.setAttribute('disabled', true);
+        submitButton.textContent = 'Yuborilmoqda...'
 
-      submitButton.removeAttribute('disabled');
-      submitButton.textContent = "Ro'yxatdan o'tish";
-      closeModal();
-      window.location.href = `../telegram.html`
-    }
-  })
-} catch (e) {
-}
+        localStorage.setItem('user', JSON.stringify({
+          name, phone: '+998' + phone, time: new Date().toLocaleString()
+        }))
+
+        submitButton.removeAttribute('disabled');
+        submitButton.textContent = "Ro'yxatdan o'tish";
+        closeModal();
+        window.location.href = `../telegram.html`
+      }
+    })
+  } catch (e) {
+  }
+});
