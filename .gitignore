@@ -9,6 +9,7 @@ firebase-debug.*.log*
 .idea
 *.iml
 *.xml
+*.zip
 
 # Firebase cache
 .firebase/
