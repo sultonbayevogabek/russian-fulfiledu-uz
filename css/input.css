@@ -5,13 +5,12 @@ body {
 }
 
 .custom-shadow {
-  box-shadow: 0px 4px 12px 0px #00000014;
+  box-shadow: 0 4px 12px 0 #00000014;
 }
 
 .shadow-top {
   box-shadow: 0 -4px 6px -1px #00000014;
 }
-
 
 .main-button {
   background: #E63030;
