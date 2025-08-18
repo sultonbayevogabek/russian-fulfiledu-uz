@@ -1,11 +1,6 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function() {
-  // CSS yuklanganidan keyin
-  window.addEventListener('load', function() {
-    document.body.style.opacity = '1';
-  });
-
   // Index page
   try {
     const phone = document.getElementById("phone");
